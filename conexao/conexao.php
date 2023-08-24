@@ -3,7 +3,7 @@ class Conexao{
     private $host="localhost";
     private $usuario="root";
     private $senha="";
-    private $banco="usuario";
+    private $banco="avaliacao";
     public $conn;
     public function getConnection(){
         $this->conn=null;
@@ -15,5 +15,6 @@ class Conexao{
         }
         return $this->conn;
     }
+    
 }
 ?>

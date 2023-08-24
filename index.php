@@ -6,20 +6,20 @@ require_once('conexao/conexao.php');
 
 $database = new Conexao();
 $db = $database->getConnection();
-$usuario = new Usuario($db);
+$cliente = new Usuario($db);
 
 if(isset($_POST['logar'])){
-    $email = $_POST['email'];
+    $nome = $_POST['nome'];
     $senha = $_POST['senha'];
 
-    if($usuario->logar($email, $senha)){
-        $_SESSION['email'] = $email;
+    if($cliente->logar($nome, $senha)){
+        $_SESSION['nome'] = $nome;
 
         header("Location: dashboard.php");
         exit();
 
     }else{
-        print "<script> alert ('Login invalido')</script>";
+        print "<script> alert ('Credenciais invalidas')</script>";
     }
 }
 
@@ -32,13 +32,17 @@ if(isset($_POST['logar'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="formulario">
+<div class="login">
+    <h1>Tela de Login</h1><br>
 <form method="POST">
-    <label for="Email">E-mail</label>
-    <input type="email" name="email" placeholder="Coloque seu E-mail" required>
+    <label for="nome">Nome de usuario</label>
+    <input type="text" name="nome" placeholder="Coloque seu nome" required>
     <label for="Senha">Senha</label>
-    <input type="password" name="senha" placeholder="Coloque sua Senha" required>
+    <input type="password" name="senha" placeholder="Coloque sua Senha" minlength="8" required>
 
     <button type="submit" name="logar">Logar</button>
 </form>    
